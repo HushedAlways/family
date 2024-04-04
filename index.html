@@ -19,44 +19,70 @@
             margin-top: 50px; /* 增加顶部间距 */
             transition: opacity 2s ease-in-out; /* 添加渐变效果 */
         }
+        #startButton {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #880E4F;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        #footer {
+            margin-top: 100px;
+            font-size: 12px;
+        }
         /* 更多美化样式 */
     </style>
 </head>
 <body>
     <div id="confetti-wrapper"></div>
     <div class="banner" id="birthdayMessage">生日快乐，亲爱的！</div>
+    <button id="startButton">开始庆祝</button>
+    <div id="footer">© <span id="year"></span> 生日快乐！</div>
+
+    <audio id="birthdaySong" src="https://example.com/birthday-song.mp3"></audio> <!-- 示例链接，请替换为有效的音乐文件链接 -->
 
     <script src="https://cdn.jsdelivr.net/npm/@canvas-confetti@1.4.0/dist/canvas-confetti.min.js"></script>
     <script>
         window.onload = function() {
-            var end = Date.now() + (15 * 1000); // 持续时间设置为15秒
+            document.getElementById('year').innerText = new Date().getFullYear();
 
-            // 创建一个持续的彩带效果
-            var interval = setInterval(function() {
-                if (Date.now() > end) {
-                    clearInterval(interval);
-                }
+            var startButton = document.getElementById('startButton');
+            startButton.onclick = function() {
+                var end = Date.now() + (15 * 1000); // 持续时间设置为15秒
 
-                // 每次调用生成随机位置的彩带
-                canvasConfetti.create(document.getElementById('confetti-wrapper'), { resize: true })({
-                    particleCount: 7,
-                    angle: 60,
-                    spread: 55,
-                    origin: { x: 0 },
-                    colors: ['#BBDEFB', '#C8E6C9', '#FFCDD2', '#D1C4E9'] // 更多彩色彩带
-                });
-                canvasConfetti.create(document.getElementById('confetti-wrapper'), { resize: true })({
-                    particleCount: 7,
-                    angle: 120,
-                    spread: 55,
-                    origin: { x: 1 },
-                    colors: ['#BBDEFB', '#C8E6C9', '#FFCDD2', '#D1C4E9'] // 更多彩色彩带
-                });
-            }, 250);
+                // 创建一个持续的彩带效果
+                var interval = setInterval(function() {
+                    if (Date.now() > end) {
+                        clearInterval(interval);
+                    }
 
-            // 渐变显示祝福语
-            var birthdayMessage = document.getElementById('birthdayMessage');
-            birthdayMessage.style.opacity = 1; // 改变透明度显示祝福语
+                    // 每次调用生成随机位置的彩带
+                    canvasConfetti.create(document.getElementById('confetti-wrapper'), { resize: true })({
+                        particleCount: 7,
+                        angle: 60,
+                        spread: 55,
+                        origin: { x: 0 },
+                        colors: ['#BBDEFB', '#C8E6C9', '#FFCDD2', '#D1C4E9']
+                    });
+                    canvasConfetti.create(document.getElementById('confetti-wrapper'), { resize: true })({
+                        particleCount: 7,
+                        angle: 120,
+                        spread: 55,
+                        origin: { x: 1 },
+                        colors: ['#BBDEFB', '#C8E6C9', '#FFCDD2', '#D1C4E9']
+                    });
+                }, 250);
+
+                // 渐变显示祝福语
+                var birthdayMessage = document.getElementById('birthdayMessage');
+                birthdayMessage.style.opacity = 1;
+
+                // 播放生日快乐歌曲
+                document.getElementById('birthdaySong').play();
+            };
         };
     </script>
 </body>
