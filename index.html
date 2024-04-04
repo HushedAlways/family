@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>生日提醒</title>
+    <script src="https://cdn.jsdelivr.net/npm/@canvas-confetti@1.4.0/dist/canvas-confetti.min.js"></script>
 </head>
 <body>
     <div id="message"></div>
@@ -10,7 +11,7 @@
     <script>
         function showBirthdayMessage() {
             const today = new Date();
-            const month = today.getMonth() + 1; // JavaScript中，月份是从0开始的，所以需要+1
+            const month = today.getMonth() + 1; // JavaScript中，月份是从0开始的，所以+1
             const day = today.getDate();
 
             // 假设妈妈的生日是4月4日
@@ -22,9 +23,19 @@
             // 如果今天是妈妈的生日
             if (month === birthdayMonth && day === birthdayDay) {
                 message = "生日快乐，妈妈！";
+                // 触发彩带效果
+                fireConfetti();
             }
 
             document.getElementById("message").innerText = message;
+        }
+
+        function fireConfetti() {
+            canvasConfetti.create(document.body, { resize: true })({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
         }
 
         showBirthdayMessage(); // 页面加载时调用函数
