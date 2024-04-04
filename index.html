@@ -1,1 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生日快乐！</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #FCE4EC; /* 浅粉色背景 */
+            color: #880E4F; /* 文字颜色 */
+        }
+        .banner {
+            opacity: 0; /* 初始设为透明 */
+            font-size: 36px; /* 增大字号 */
+            font-weight: bold; /* 字体加粗 */
+            margin-top: 50px; /* 增加顶部间距 */
+            transition: opacity 2s ease-in-out; /* 添加渐变效果 */
+        }
+        /* 更多美化样式 */
+    </style>
+</head>
+<body>
+    <div id="confetti-wrapper"></div>
+    <div class="banner" id="birthdayMessage">今天是你生日，生日快乐！</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@canvas-confetti@1.4.0/dist/canvas-confetti.min.js"></script>
+    <script>
+        window.onload = function() {
+            var end = Date.now() + (15 * 1000); // 持续时间设置为15秒
+
+            // 创建一个持续的彩带效果
+            var interval = setInterval(function() {
+                if (Date.now() > end) {
+                    clearInterval(interval);
+                }
+
+                // 每次调用生成随机位置的彩带
+                canvasConfetti.create(document.getElementById('confetti-wrapper'), { resize: true })({
+                    particleCount: 7,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 },
+                    colors: ['#BBDEFB', '#C8E6C9', '#FFCDD2', '#D1C4E9'] // 更多彩色彩带
+                });
+                canvasConfetti.create(document.getElementById('confetti-wrapper'), { resize: true })({
+                    particleCount: 7,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 },
+                    colors: ['#BBDEFB', '#C8E6C9', '#FFCDD2', '#D1C4E9'] // 更多彩色彩带
+                });
+            }, 250);
+
+            // 渐变显示祝福语
+            var birthdayMessage = document.getElementById('birthdayMessage');
+            birthdayMessage.style.opacity = 1; // 改变透明度显示祝福语
+        };
+    </script>
+</body>
+</html>
 
