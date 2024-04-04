@@ -2,63 +2,32 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>生日快乐！</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            text-align: center;
-            padding: 20px;
-            background-color: #FCE4EC; /* 浅粉色背景 */
-            color: #880E4F; /* 文字颜色 */
-        }
-        .banner {
-            opacity: 0; /* 初始设为透明 */
-            font-size: 36px; /* 增大字号 */
-            font-weight: bold; /* 字体加粗 */
-            margin-top: 50px; /* 增加顶部间距 */
-            transition: opacity 2s ease-in-out; /* 添加渐变效果 */
-        }
-        /* 更多美化样式 */
-    </style>
+    <title>生日提醒</title>
 </head>
 <body>
-    <div id="confetti-wrapper"></div>
-    <div class="banner" id="birthdayMessage">今天是你生日，生日快乐！</div>
+    <div id="message"></div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@canvas-confetti@1.4.0/dist/canvas-confetti.min.js"></script>
     <script>
-        window.onload = function() {
-            var end = Date.now() + (15 * 1000); // 持续时间设置为15秒
+        function showBirthdayMessage() {
+            const today = new Date();
+            const month = today.getMonth() + 1; // JavaScript中，月份是从0开始的，所以需要+1
+            const day = today.getDate();
 
-            // 创建一个持续的彩带效果
-            var interval = setInterval(function() {
-                if (Date.now() > end) {
-                    clearInterval(interval);
-                }
+            // 假设妈妈的生日是4月4日
+            const birthdayMonth = 4; // 4月
+            const birthdayDay = 4; // 4日
 
-                // 每次调用生成随机位置的彩带
-                canvasConfetti.create(document.getElementById('confetti-wrapper'), { resize: true })({
-                    particleCount: 7,
-                    angle: 60,
-                    spread: 55,
-                    origin: { x: 0 },
-                    colors: ['#BBDEFB', '#C8E6C9', '#FFCDD2', '#D1C4E9'] // 更多彩色彩带
-                });
-                canvasConfetti.create(document.getElementById('confetti-wrapper'), { resize: true })({
-                    particleCount: 7,
-                    angle: 120,
-                    spread: 55,
-                    origin: { x: 1 },
-                    colors: ['#BBDEFB', '#C8E6C9', '#FFCDD2', '#D1C4E9'] // 更多彩色彩带
-                });
-            }, 250);
+            let message = "今天没有人过生日哦";
 
-            // 渐变显示祝福语
-            var birthdayMessage = document.getElementById('birthdayMessage');
-            birthdayMessage.style.opacity = 1; // 改变透明度显示祝福语
-        };
+            // 如果今天是妈妈的生日
+            if (month === birthdayMonth && day === birthdayDay) {
+                message = "生日快乐，妈妈！";
+            }
+
+            document.getElementById("message").innerText = message;
+        }
+
+        showBirthdayMessage(); // 页面加载时调用函数
     </script>
 </body>
 </html>
-
